@@ -79,7 +79,6 @@
     // All special link sites at the bottom
     const sites = [
       { url: "https://quizl.io/", type: "iframe", label: "Quizl" },
-      { url: "https://guessthe.house/", type: "iframe", label: "Guess The House" },
       { url: "https://bandle.app/daily", type: "iframe", label: "Bandle" },
       { url: "https://crosstune.io/", type: "iframe", label: "Crosstune" },
       { url: "https://harmonies.io/", type: "iframe", label: "Harmonies" },
@@ -89,6 +88,8 @@
       { url: "https://dailydozentrivia.com/", type: "iframe", label: "Daily Dozen Trivia" },
       { url: "https://costcodle.com/", type: "iframe", label: "Costcodle" },
       { url: "https://worldle.teuteuf.fr/", type: "iframe", label: "Worldle" },
+      // Guess The House as a link, above NYT:
+      { url: "https://guessthe.house/", type: "link", label: "Guess The House" },
       // Special link pages at the bottom:
       { url: "https://www.nytimes.com/games/connections", type: "link", label: "NYT Connections" },
       { url: "https://www.foodguessr.com/", type: "link", label: "Food Guessr" },
@@ -112,24 +113,12 @@
       current = index;
       select.value = current;
       const site = sites[current];
-      // Check if it's one of the last 3 "link" pages
       if (site.type === "iframe") {
         contentArea.innerHTML = `<iframe src="${site.url}"></iframe>`;
       } else {
-        // Show explanation for last 3 links
-        let explanation = "";
-        if (current >= sites.length - 3) {
-          explanation = `
-            <p style="color:#ffa;max-width:600px;margin:0 auto 18px;font-size:1.15em;">
-              <strong>Note:</strong> This site cannot be displayed inside this page due to its security settings.
-              Please click the button below to open it in a new tab.
-            </p>
-          `;
-        }
         contentArea.innerHTML = `
           <div class="link-page">
             <h1>${site.label}</h1>
-            ${explanation}
             <a href="${site.url}" target="_blank">Visit ${site.label}</a>
           </div>
         `;
